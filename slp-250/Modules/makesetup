@@ -1,5 +1,4 @@
 #! /bin/sh
-
 # Convert templates into Makefile and config.c, based on the module
 # definitions found in the file Setup.
 #
@@ -38,7 +37,6 @@
 #   which creates a shared library version to the end of the Makefile
 # - for each variable definition found in Setup, insert the definition
 #   before the comment 'Definitions added by makesetup'
-
 # Loop over command line options
 usage='
 usage: makesetup [-s srcdir] [-l libdir] [-c config.c.in] [-m Makefile.pre]
