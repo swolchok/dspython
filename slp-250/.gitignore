@@ -1,0 +1,5 @@
+*.pyc
+*~
+domain.ps
+*.so
+*.o
