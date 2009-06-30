@@ -8,7 +8,7 @@ endif
 
 include $(DEVKITARM)/ds_rules
 
-PATH		:=	/c/dspython/NDSPython/dldinoap:$(PATH)
+PATH		:=	$(DSPYTHON)/NDSPython/dldinoap:$(PATH)
 
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
@@ -66,10 +66,10 @@ LIBS	:= -lfat -lnds9 -lnds7 -lpython2.5 -lm -lz
 #---------------------------------------------------------------------------------
 
 # overwrite ds_rules
-LIBNDS := /c/dspython/libnds-src-20070503
-LIBFAT := /c/dspython/libfat-src-20070127
+LIBNDS := $(DSPYTHON)/libnds-1.3.6
+LIBFAT := $(DSPYTHON)/libfat-src-20070127
 
-LIBDIRS	:=	$(LIBNDS):$(LIBFAT)
+LIBDIRS	:=	$(LIBNDS) $(LIBFAT)
 
 EXTERNALINCLUDES :=	$(PYTHON_DIR) \
 			$(PYTHON_DIR)/include \

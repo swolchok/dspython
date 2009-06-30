@@ -3,6 +3,8 @@ export INCLUDE=$DEVKITARM/arm-eabi/include
 export LIB=$DEVKITARM/arm-eabi/lib
 #
 export CC=$DEVKITARM/bin/arm-eabi-gcc
+export DSPYTHON=`pwd`
+
 #
 # rem ndslib
 #

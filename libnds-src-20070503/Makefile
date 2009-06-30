@@ -47,9 +47,9 @@ export BASEFLAGS	:=	-g -Wall -O2\
 				-fomit-frame-pointer\
 				-ffast-math \
 				-I$(INCDIR) \
-				-I/c/dspython/slp-250/Include \
-				-I/c/dspython/slp-250 \
-				-I/c/dspython/slp-250/Stackless
+				-I$(DSPYTHON)/slp-250/Include \
+				-I$(DSPYTHON)/slp-250 \
+				-I$(DSPYTHON)/slp-250/Stackless
 
 
 .PHONY:	all dist docs clean lib/libnds9.a  lib/libnds7.a
@@ -71,34 +71,34 @@ wrappers: source/arm9/wrap_console.c \
 		  source/arm9/wrap_bios.c
 
 PYTHON := python
-PYREXC := /c/Python24/Scripts/pyrexc.py
+PYREXC := pyrexc
 
 source/arm9/wrap_bios.c: include/nds/wrap_bios.pyx
-	$(PYTHON) $(PYREXC) include/nds/wrap_bios.pyx -o source/arm9/wrap_bios.c
+	$(PYREXC) include/nds/wrap_bios.pyx -o source/arm9/wrap_bios.c
 
 source/arm9/wrap_input.c: include/nds/arm9/wrap_input.pyx
-	$(PYTHON) $(PYREXC) include/nds/arm9/wrap_input.pyx -o source/arm9/wrap_input.c
+	$(PYREXC) include/nds/arm9/wrap_input.pyx -o source/arm9/wrap_input.c
 
 source/arm9/wrap_console.c: include/nds/arm9/wrap_console.pyx
-	$(PYTHON) $(PYREXC) include/nds/arm9/wrap_console.pyx -o source/arm9/wrap_console.c
+	$(PYREXC) include/nds/arm9/wrap_console.pyx -o source/arm9/wrap_console.c
 
 source/arm9/wrap_video.c: include/nds/arm9/wrap_video.pyx
-	$(PYTHON) $(PYREXC) include/nds/arm9/wrap_video.pyx -o source/arm9/wrap_video.c
+	$(PYREXC) include/nds/arm9/wrap_video.pyx -o source/arm9/wrap_video.c
 
 source/arm9/wrap_videoGL.c: include/nds/arm9/wrap_videoGL.pyx
-	$(PYTHON) $(PYREXC) include/nds/arm9/wrap_videoGL.pyx -o source/arm9/wrap_videoGL.c
+	$(PYREXC) include/nds/arm9/wrap_videoGL.pyx -o source/arm9/wrap_videoGL.c
 
 source/arm9/wrap_system.c: include/nds/wrap_system.pyx
-	$(PYTHON) $(PYREXC) include/nds/wrap_system.pyx -o source/arm9/wrap_system.c
+	$(PYREXC) include/nds/wrap_system.pyx -o source/arm9/wrap_system.c
 
 source/arm9/wrap_interrupts.c: include/nds/wrap_interrupts.pyx
-	$(PYTHON) $(PYREXC) include/nds/wrap_interrupts.pyx -o source/arm9/wrap_interrupts.c
+	$(PYREXC) include/nds/wrap_interrupts.pyx -o source/arm9/wrap_interrupts.c
 
 source/arm9/wrap_rumble.c: include/nds/arm9/wrap_rumble.pyx
-	$(PYTHON) $(PYREXC) include/nds/arm9/wrap_rumble.pyx -o source/arm9/wrap_rumble.c
+	$(PYREXC) include/nds/arm9/wrap_rumble.pyx -o source/arm9/wrap_rumble.c
 
 source/arm7/wrap_touch.c: include/nds/arm7/wrap_touch.pyx
-	$(PYTHON) $(PYREXC) include/nds/arm7/wrap_touch.pyx -o source/arm7/wrap_touch.c
+	$(PYREXC) include/nds/arm7/wrap_touch.pyx -o source/arm7/wrap_touch.c
 	
 #---------------------------------------------------------------------------------
 lib/libnds9.a: lib $(DEPENDS)/arm9 $(BUILD)/arm9

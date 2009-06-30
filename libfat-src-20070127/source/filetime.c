@@ -65,11 +65,11 @@
 #define SECONDS_PER_YEAR 31556926
 
 u16 _FAT_filetime_getTimeFromRTC (void) {
-#ifdef NDS
+#if 0 //XXX swolchok: port to modern libfat
 	int hour, minute, second;
-	hour = (IPC->time.rtc.hours >= HOUR_PM_INDICATOR ? IPC->time.rtc.hours - HOUR_PM_INDICATOR : IPC->time.rtc.hours);
-	minute = IPC->time.rtc.minutes;
-	second = IPC->time.rtc.seconds;
+	hour = (IPC->unixTime.rtc.hours >= HOUR_PM_INDICATOR ? IPC->time.rtc.hours - HOUR_PM_INDICATOR : IPC->time.rtc.hours);
+	minute = IPC->unixTime.rtc.minutes;
+	second = IPC->unixTime.rtc.seconds;
 	
 	// Check that the values are all in range.
 	// If they are not, return 0 (no timestamp)
@@ -89,12 +89,12 @@ u16 _FAT_filetime_getTimeFromRTC (void) {
 
 
 u16 _FAT_filetime_getDateFromRTC (void) {
-#ifdef NDS
+#if 0 // XXX swolchok: port to modern libfat
 	int year, month, day;
 	
-	year = IPC->time.rtc.year;
-	month = IPC->time.rtc.month;
-	day = IPC->time.rtc.day;
+	year = IPC->unixTime.rtc.year;
+	month = IPC->unixTime.rtc.month;
+	day = IPC->unixTime.rtc.day;
 	
 	if ((year < MIN_YEAR) || (year > MAX_YEAR)) return 0;
 	if ((month < MIN_MONTH) || (month > MAX_MONTH)) return 0;

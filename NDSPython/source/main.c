@@ -21,7 +21,7 @@ PyMODINIT_FUNC initwrap_bios(void);
 int pyMain(void) {
 	FILE *fp;
 
-	printf("Console init...\n");
+	//printf("Console init...\n");
 	consoleDemoInit();
 	printf("done\n");
 	

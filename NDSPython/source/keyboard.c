@@ -3,6 +3,7 @@
 #include <nds.h>
 #include <nds/arm9/console.h>	//basic print funcionality
 #include <nds/arm9/sound.h>	// sound functions
+#include <nds/registers_alt.h>
 
 #include "keyboard.raw.h"
 #include "keyboard.map.h"
@@ -86,7 +87,7 @@ void initKeyboard()
 	//get the map
 	uint16 * map = (uint16 *) SCREEN_BASE_BLOCK(29); 
 
-	BG0_CR = BG_COLOR_16 | BG_32x32 | (29 << SCREEN_SHIFT) | (1 << CHAR_SHIFT);
+	BG0_CR = BG_COLOR_16 | BG_32x32 | (29 << MAP_BASE_SHIFT) | (1 << TILE_BASE_SHIFT);
 	// SUB_BG0_CR = BG_COLOR_256 | BG_32x32 | (0 << SCREEN_SHIFT) | (1 << CHAR_SHIFT);	
 
 	dmaCopy((uint16 *)keyboard_Palette, (uint16 *)BG_PALETTE, 32);
@@ -181,7 +182,8 @@ char processKeyboard(char* str, unsigned int max, unsigned int echo)
 			else
 				c = keyboard_Hit_Shift[tilex+(tiley*32)];
 
-			playGenericSound(clickup_raw, clickup_raw_size);
+                        //XXX swolchok: restore sound support
+			//playGenericSound(clickup_raw, clickup_raw_size);
 			setTile(map, lasttilex, lasttiley, 0);
 
 			lastkey = 0; lasttilex = 0; lasttiley = 0;

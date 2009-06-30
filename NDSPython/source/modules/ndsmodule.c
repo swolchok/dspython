@@ -73,7 +73,7 @@ nds_meminfo(PyObject *self, PyObject *args)
 {
 	unsigned int stackSize = NDS_STACK_END - (unsigned int)fake_heap_end;
 	/* Next line taken from the newlib patches.. */
-	extern char   end asm ("end");	/* Defined by the linker.  */
+	extern char   end asm ("_end");	/* Defined by the linker.  */
 	struct mallinfo m = mallinfo();
 	unsigned int heapSize = (unsigned int)fake_heap_end - (unsigned int)&end;
 

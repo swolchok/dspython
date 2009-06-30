@@ -57,7 +57,8 @@ extern "C" {
 	/* Linux/S390 */
 #elif defined(__GNUC__) && defined(__s390x__) && defined(__linux__)
 	/* Linux/S390 zSeries */
-#elif defined(__GNUC__) && defined(__arm__) && defined(__thumb__)
+/* swolchok -- __thumb__ is NOT defined with my devkitpro */
+#elif defined(__GNUC__) && defined(__arm__) /*&& defined(__thumb__)*/
 	/* devkitpro/devkitarm/libnds bootstrapped binaries */
 #else
 	/* no supported platform */
