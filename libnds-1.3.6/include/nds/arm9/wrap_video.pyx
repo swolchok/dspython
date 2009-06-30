@@ -1,11 +1,17 @@
 def RGB15(int r, int g, int b):
-	return ((r)|((g)<<5)|((b)<<10))
+        return ((r)|((g)<<5)|((b)<<10))
 
 def RGB5(int r, int g, int b):
-	return ((r)|((g)<<5)|((b)<<10))
+        return ((r)|((g)<<5)|((b)<<10))
 
 def RGB8(int r, int g, int b):
-	return (((r)>>3)|(((g)>>3)<<5)|(((b)>>3)<<10))
+        return (((r)>>3)|(((g)>>3)<<5)|(((b)>>3)<<10))
+
+def ARGB16(int a, int r, int g, int b):
+        return ( ((a) << 15) | (r)|((g)<<5)|((b)<<10))
+
+SCREEN_HEIGHT = 192
+SCREEN_WIDTH = 256
 
 MODE_0_2D=      0x10000
 MODE_1_2D=      0x10001
@@ -35,16 +41,28 @@ MODE_FB3=(0x000E0000)
 VRAM_A_LCD=0
 
 cdef extern from "nds/arm9/video.h":
-	void videoSetMode(int mode)
-	void vramSetBankA(int a)
+        void videoSetMode(int mode)
+        void vramSetBankA(int a)
 
 def wvideoSetMode(int mode):
-	videoSetMode(mode)
+        videoSetMode(mode)
 
 def wvramSetBankA(int a):
-	vramSetBankA(a)
+        vramSetBankA(a)
 
 def wvramAPutPixel(int x, int y, int color):
-	cdef unsigned short *VRAM_A
-	VRAM_A=<unsigned short *>0x6800000
-	VRAM_A[x + 256 * y] = color
+        cdef unsigned short *VRAM_A
+        VRAM_A=<unsigned short *>0x6800000
+        VRAM_A[x + 256 * y] = color
+
+def wvramAPutRow(int y, colors):
+        cdef unsigned short *VRAM_A
+        VRAM_A=<unsigned short *>0x6800000
+        for idx in xrange(len(colors)):
+                VRAM_A[idx + 256 * y] = colors[idx]
+
+def wvramAPutVRAM(colors):
+        cdef unsigned short *VRAM_A
+        VRAM_A=<unsigned short *>0x6800000
+        for (idx, color) in enumerate(colors):
+                VRAM_A[idx] = color
